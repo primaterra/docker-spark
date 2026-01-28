@@ -1,0 +1,40 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "target": "dev"
+  },
+
+  "remoteUser": "ubuntu",
+
+  "postCreateCommand": "pre-commit install --hook-type pre-commit --hook-type commit-msg",
+
+  "workspaceFolder": "/workspace",
+
+  "mounts": [
+    {
+      "source": "${localWorkspaceFolder}",
+      "target": "/workspace",
+      "type": "bind"
+    },
+    {
+      "source": "${localEnv:HOME}/.ssh",
+      "target": "/home/vscode/.ssh",
+      "type": "bind"
+    },
+    {
+      "source": "${localEnv:HOME}/.gitconfig",
+      "target": "/home/vscode/.gitconfig",
+      "type": "bind"
+    }
+  ],
+
+  "customizations": {
+    "vscode": {
+
+      "extensions": [
+        "databricks.databricks"
+      ]
+
+    }
+  }
+}
