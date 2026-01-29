@@ -8,7 +8,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         git \
         python3 \
-        python3-pip && \
+        python3-pip \
+        openssh-client && \
     rm -rf /var/lib/apt/lists/*
 
 
