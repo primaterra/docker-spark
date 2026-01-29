@@ -1,0 +1,2 @@
+pre-commit hooks are deleted on host, rebuild without cache
+the container should detect no pre-commit... else test failed
