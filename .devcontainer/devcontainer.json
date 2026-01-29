@@ -4,9 +4,9 @@
     "target": "dev"
   },
 
-  // "remoteUser": "ubuntu",
+  "postCreateCommand": "pre-commit install",
 
-  // "postCreateCommand": "pre-commit install --hook-type pre-commit --hook-type commit-msg",
+  // "remoteUser": "ubuntu",
 
   // "workspaceFolder": "/workspace",
 
