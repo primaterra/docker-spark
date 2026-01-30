@@ -24,8 +24,9 @@ repos:
 
   # Python linting
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.11
+    rev: v0.14.14
+    files: ^(pyproject\.toml|src/app/fp_car_tasks/.*\.py|src/app/fp_car_monitoring/.*\.py)$
     hooks:
       - id: ruff-check
         args: [--fix]
-        files: ^(pyproject\.toml|src/app/fp_car_tasks/.*\.py|src/app/fp_car_monitoring/.*\.py)$
+      - id: ruff-format

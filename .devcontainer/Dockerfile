@@ -31,6 +31,14 @@ RUN pipx install pre-commit && \
     pipx install commitizen
 ENV PATH="/home/ubuntu/.local/bin:${PATH}"
 
+# Install project requiremnets
+WORKDIR /workspaces/docker-spark
+
+RUN python3 -m venv /home/ubuntu/venv
+ENV PATH="/home/ubuntu/venv/bin:${PATH}"
+
+COPY --chown=ubuntu:ubuntu requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 #================================
 # CI stage
 #================================
