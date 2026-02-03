@@ -28,6 +28,7 @@ RUN apt-get update && \
 USER ubuntu
 RUN mkdir -p /home/ubuntu/.local/bin
 RUN pipx install pre-commit && \
+    pipx install python-semantic-release && \
     pipx install commitizen
 ENV PATH="/home/ubuntu/.local/bin:${PATH}"
 
