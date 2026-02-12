@@ -8,21 +8,21 @@ error() { echo -e "\033[1;31m[ERROR] $*\033[0m" >&2; }
 
 
 generate_toml_config() {
-    # Generates pyproject.toml for python-semantic-release
-    # if it does not exist.
+    # Generates or updates pyproject.toml with python-semantic-release config
+    # Appends default [tool.semantic_release] section if missing or file absent
 
-    info "Generating pyproject.toml config..."
+    info "Checking pyproject.toml for semantic-release config..."
 
-    if [ ! -f pyproject.toml ]; then
-        info "pyproject.toml not found. Generating default config..."
-        if semantic-release generate-config --pyproject > pyproject.toml; then
-            info "Default config generated successfully."
+    if [ ! -f pyproject.toml ] || ! grep -q '^\[tool\.semantic_release\]' pyproject.toml; then
+        info "Adding default semantic_release config..."
+        if semantic-release generate-config --pyproject >> pyproject.toml; then
+            info "Default config added successfully."
         else
-            error "Failed to generate config with semantic-release."
+            error "Failed to add semantic_release config."
             exit 1
         fi
     else
-        info "pyproject.toml already exists - skipping default config generation."
+        info "pyproject.toml already has semantic_release config - skipping."
     fi
 }
 
