@@ -1,0 +1,6 @@
+- add secretes checks
+- add sphinx doc builds from docstrings (decide stage)
+- add doctest
+- create and test CI docker stage
+- create and test CI/CD pipeline
+- define src/ code structure for scalability, include databricks pipelines
