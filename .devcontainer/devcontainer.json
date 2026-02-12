@@ -18,7 +18,8 @@
     "vscode": {
 
       "extensions": [
-        "databricks.databricks"
+        "databricks.databricks",
+        "charliermarsh.ruff"
       ]
 
     }

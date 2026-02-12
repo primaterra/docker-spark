@@ -24,22 +24,23 @@ RUN apt-get update && \
 
 
 # Install pre-commit & comitizen as non-root
-# using pre-defined `unbuntu` user
+# using pre-defined user: `unbuntu`
 USER ubuntu
 RUN mkdir -p /home/ubuntu/.local/bin
 RUN pipx install pre-commit && \
     pipx install python-semantic-release && \
-    pipx install commitizen
+    pipx install commitizen && \
+    pipx install ruff==0.15.0
 ENV PATH="/home/ubuntu/.local/bin:${PATH}"
 
-# Install project requiremnets
-WORKDIR /workspaces/${PROJECT_NAME}
+# # Install project requiremnets
+# WORKDIR /workspaces/${PROJECT_NAME}
 
-RUN python3 -m venv /home/ubuntu/venv
-ENV PATH="/home/ubuntu/venv/bin:${PATH}"
+# RUN python3 -m venv /home/ubuntu/venv
+# ENV PATH="/home/ubuntu/venv/bin:${PATH}"
 
-COPY --chown=ubuntu:ubuntu requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# COPY --chown=ubuntu:ubuntu requirements.txt .
+# RUN pip install --no-cache-dir -r requirements.txt
 #================================
 # CI stage
 #================================

@@ -23,10 +23,15 @@ repos:
         args: [feat, fix, docs, style, refactor, perf, test, chore]
 
   # Python linting
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.14
-    files: ^(pyproject\.toml|src/app/fp_car_tasks/.*\.py|src/app/fp_car_monitoring/.*\.py)$
+  - repo: local
     hooks:
-      - id: ruff-check
-        args: [--fix]
+      - id: ruff-lint
+        name: Ruff Lint & Auto-fix
+        entry: ruff check --fix
+        language: system
+        types: [python]
       - id: ruff-format
+        name: Ruff Format
+        entry: ruff format
+        language: system
+        types: [python]
