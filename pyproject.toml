@@ -76,12 +76,12 @@ dist_glob_patterns = ["dist/*"]
 upload_to_vcs_release = true
 
 [tool.ruff]
-extend-select = [
+lint.extend-select = [
     "E501",  # line lenght
     "D",     # all docstrings rules
     "ANN"    # all flake8-annotations (type hint) rules
 ]
-ignore = ["D100"]
+lint.ignore = ["D100"]
 line-length = 79
 
 [tool.ruff.lint.pydocstyle]

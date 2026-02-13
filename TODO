@@ -1,4 +1,3 @@
-- add secretes checks
 - add sphinx doc builds from docstrings (decide stage)
 - add doctest
 - create and test CI docker stage
