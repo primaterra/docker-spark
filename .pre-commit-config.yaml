@@ -36,8 +36,18 @@ repos:
         language: system
         types: [python]
 
+  # Secrets detection
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.0
     hooks:
       - id: gitleaks
         args: [--staged, --verbose]
+
+  # # Docstrings testing
+  # - repo: local
+  #   hooks:
+  #     - id: doctests
+  #       name: Doctests
+  #       entry: pytest --doctest-modules -q
+  #       language: system
+  #       types: [python]
