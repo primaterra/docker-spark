@@ -43,11 +43,11 @@ repos:
       - id: gitleaks
         args: [--staged, --verbose]
 
-  # # Docstrings testing
-  # - repo: local
-  #   hooks:
-  #     - id: doctests
-  #       name: Doctests
-  #       entry: pytest --doctest-modules -q
-  #       language: system
-  #       types: [python]
+  # Docstrings testing
+  - repo: local
+    hooks:
+      - id: doctests
+        name: Doctests
+        entry: pytest --doctest-modules -q
+        language: system
+        types: [python]
