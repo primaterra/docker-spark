@@ -51,3 +51,15 @@ repos:
         entry: pytest --doctest-modules -q
         language: system
         types: [python]
+
+  # Note!: In CI run full sphinx buid and SKIP light checks
+  # Sphinx light checks
+  - repo: https://github.com/sphinx-contrib/sphinx-lint
+    rev: v1.0.2
+    hooks:
+      - id: sphinx-lint
+  # Sphinx Numpy specific validation
+  - repo: https://github.com/numpy/numpydoc
+    rev: v1.10.0
+    hooks:
+      - id: numpydoc-validation

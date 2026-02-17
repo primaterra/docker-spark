@@ -1,8 +1,14 @@
+"""Main utilities module."""
+
 from __future__ import annotations
 
 
 def add(a: int, b: int) -> int:
-    """Add two integers.
+    """
+    Add two integers.
+
+    This function computes the sum of two integers and
+    demonstrates NumPy-style formatting.
 
     Parameters
     ----------

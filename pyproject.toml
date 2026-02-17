@@ -81,8 +81,15 @@ lint.extend-select = [
     "D",     # all docstrings rules
     "ANN"    # all flake8-annotations (type hint) rules
 ]
-lint.ignore = ["D100"]
 line-length = 79
+lint.ignore = []
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
+
+[tool.numpydoc_validation]
+checks = [
+    "all",
+    "SA01",  # disable "See Also section not found"
+    "ES01",  # disable "No extended summary found" (optional)
+]
