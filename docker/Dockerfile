@@ -2,6 +2,7 @@
 # Base
 #================================
 FROM docker.io/databricksruntime/minimal:17.3-LTS AS base
+WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -38,13 +39,19 @@ ENV PATH="/home/ubuntu/.local/bin:${PATH}"
 #================================
 # CI stage
 #================================
-# FROM base AS ci
+FROM base AS ci
 
-# USER ubuntu
-# RUN mkdir -p /home/ubuntu/.local/bin && \
-#     pipx install pre-commit && \
-#     pipx install python-semantic-release && \
-#     pipx install commitizen && \
-#     pipx install ruff==0.15.0
+USER ubuntu
+RUN mkdir -p /home/ubuntu/.local/bin
 
-# ENV PATH="/home/ubuntu/.local/bin:${PATH}"
+RUN pipx install pre-commit \
+    && pipx install python-semantic-release \
+    && pipx install commitizen \
+    && pipx install ruff==0.15.0
+
+ENV PATH="/home/ubuntu/.local/bin:${PATH}"
+
+# Sphinx install & config
+COPY docs/requirements.txt /tmp/docs-requirements.txt
+RUN pipx install sphinx \
+    && pipx runpip sphinx install --no-cache-dir -r /tmp/docs-requirements.txt
