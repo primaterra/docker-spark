@@ -51,7 +51,7 @@ repos:
         entry: pytest --doctest-modules -q
         language: system
         types: [python]
-        exclude: 'conf\.py$'
+        exclude: '^docs/conf\.py$'
 
   # Note!: In CI run full sphinx buid and SKIP light checks
   # Sphinx light checks
