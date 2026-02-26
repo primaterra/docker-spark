@@ -12,3 +12,8 @@ env/
 
 # Ruff cache – regenerates automatically
 .ruff_cache/
+
+# Sphinx build
+_build/
+main.rst
+modules.rst
