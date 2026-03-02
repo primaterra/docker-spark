@@ -1,7 +1,7 @@
 .PHONY: sphinx-ci-test
 
 sphinx-ci:
-	docker build -t sphinx-ci docker/
+	docker build --target ci -t sphinx-ci -f docker/Dockerfile .
 
 sphinx-ci-test:
 	docker run --rm \

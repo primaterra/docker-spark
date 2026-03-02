@@ -11,6 +11,7 @@ RUN apt-get update && \
         python3-pip \
         openssh-client \
         pipx \
+        make \
     && rm -rf /var/lib/apt/lists/* \
     && pipx ensurepath
 
