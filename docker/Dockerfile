@@ -29,6 +29,14 @@ RUN mkdir -p /home/ubuntu/.local/bin
 RUN pipx install pre-commit \
     && pipx install python-semantic-release \
     && pipx install ruff==0.15.0
+
+ARG UPDATECLI_VERSION=v0.114.0
+RUN curl -L -o /tmp/updatecli.tar.gz \
+      "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_VERSION}/updatecli_Linux_x86_64.tar.gz" && \
+    tar xzf /tmp/updatecli.tar.gz -C /home/ubuntu/.local/bin updatecli && \
+    chmod +x /home/ubuntu/.local/bin/updatecli && \
+    rm /tmp/updatecli.tar.gz
+
 ENV PATH="/home/ubuntu/.local/bin:${PATH}"
 
 
