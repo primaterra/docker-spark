@@ -1,0 +1,28 @@
+name: Bump Dockerfile tools
+
+autodiscovery:
+  crawlers:
+    dockerfile:
+      ignore:
+        - images:
+            - base
+            - tools
+            - ci
+
+sources:
+  git:
+    kind: shell
+    spec:
+      command: |
+        docker run --rm databricksruntime/minimal:17.3-LTS \
+          bash -c "apt-get update -qq && apt-cache policy git | grep Candidate | awk '{print $2}'"
+
+targets:
+  bump_git:
+    kind: dockerfile
+    sourceid: git
+    spec:
+      file: Dockerfile          # change if not in root
+      instruction:
+        keyword: ARG
+        matcher: GIT_VERSION     # official matcher for ARG key

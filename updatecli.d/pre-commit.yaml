@@ -1,0 +1,5 @@
+name: Bump pre-commit tools
+
+autodiscovery:
+  crawlers:
+    precommit: {}
