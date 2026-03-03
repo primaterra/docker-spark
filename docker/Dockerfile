@@ -1,6 +1,8 @@
 #================================
 # Base - Minimal shared foundation
 #================================
+# Note: tools are updated via updatecli
+
 FROM docker.io/databricksruntime/minimal:17.3-LTS@sha256:1b93e95ce32f89b0257910e8e05bde2b8e67a4c07c8580f4df9911fecb73309f AS base
 WORKDIR /app
 
