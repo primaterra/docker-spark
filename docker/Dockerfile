@@ -1,22 +1,17 @@
 #================================
 # Base - Minimal shared foundation
 #================================
-FROM docker.io/databricksruntime/minimal:17.3-LTS AS base
+FROM docker.io/databricksruntime/minimal:17.3-LTS@sha256:1b93e95ce32f89b0257910e8e05bde2b8e67a4c07c8580f4df9911fecb73309f AS base
 WORKDIR /app
-
-ARG GIT_VERSION=1:2.43*
-ARG OPENSSH_CLIENT_VERSION=1:9.6p1*
-ARG PIPX_VERSION=1.4.3*
-ARG MAKE_VERSION=4.3*
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        git=${GIT_VERSION} \
+        git \
         python3 \
         python3-pip \
-        openssh-client=${OPENSSH_CLIENT_VERSION} \
-        pipx=${PIPX_VERSION} \
-        make=${MAKE_VERSION} \
+        openssh-client \
+        pipx \
+        make \
     && rm -rf /var/lib/apt/lists/* \
     && pipx ensurepath
 

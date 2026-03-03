@@ -7,14 +7,7 @@
 
 
 # Test sphinx build:
-cd Projects/docker-spark/
-
-docker run --rm \
-  -v $(pwd):/app \
-  -w /app \
-  --user root \
-  my-ci-image sh -c '
-    rm -f docs/source/modules.rst docs/source/*_*.rst &&
-    sphinx-apidoc -o docs/source src --force --separate &&
-    sphinx-build -b html docs/source docs/_build/html -v
-  '
+ARG GIT_VERSION=1:2.43*
+ARG OPENSSH_CLIENT_VERSION=1:9.6p1*
+ARG PIPX_VERSION=1.4.3*
+ARG MAKE_VERSION=4.3*

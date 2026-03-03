@@ -1,4 +1,6 @@
-name: Bump Dockerfile tools
+name: Bump Dockerfile image and tools
+
+# Docker file path set in: targets->pre-commit->spec->file
 
 autodiscovery:
   crawlers:
@@ -9,20 +11,152 @@ autodiscovery:
             - tools
             - ci
 
+#======================
 sources:
-  git:
-    kind: shell
-    spec:
-      command: |
-        docker run --rm databricksruntime/minimal:17.3-LTS \
-          bash -c "apt-get update -qq && apt-cache policy git | grep Candidate | awk '{print $2}'"
 
-targets:
-  bump_git:
-    kind: dockerfile
-    sourceid: git
+  pre-commit:
+    name: Get latest Pre-Commit version.
+    kind: gittag
     spec:
-      file: Dockerfile          # change if not in root
+      url: https://github.com/pre-commit/pre-commit.git
+      lsremote: true
+      versionfilter:
+        kind: semver
+    transformers:
+      - trimprefix: "v"
+
+  semantic-release:
+    name: Get latest Semantic-Release version.
+    kind: gittag
+    spec:
+      url: https://github.com/python-semantic-release/python-semantic-release.git
+      lsremote: true
+      versionfilter:
+        kind: semver
+    transformers:
+      - trimprefix: "v"
+
+  ruff:
+    name: Get latest Ruff version.
+    kind: gittag
+    spec:
+      url: https://github.com/astral-sh/ruff.git
+      lsremote: true
+      versionfilter:
+        kind: semver
+
+  updatecli:
+    name: Get latest UpdateCLI version.
+    kind: gittag
+    spec:
+      url: https://github.com/updatecli/updatecli.git
+      lsremote: true
+      versionfilter:
+        kind: semver
+
+  pytest:
+    name: Get latest PyTest version.
+    kind: gittag
+    spec:
+      url: https://github.com/pytest-dev/pytest.git
+      lsremote: true
+      versionfilter:
+        kind: semver
+    transformers:
+      - trimprefix: "v"
+
+  commitizen:
+    name: Get latest Commitizen version.
+    kind: gittag
+    spec:
+      url: https://github.com/commitizen-tools/commitizen.git
+      lsremote: true
+      versionfilter:
+        kind: semver
+    transformers:
+      - trimprefix: "v"
+
+  sphinx:
+    name: Get latest Sphinx version.
+    kind: gittag
+    spec:
+      url: https://github.com/sphinx-doc/sphinx.git
+      lsremote: true
+      versionfilter:
+        kind: semver
+    transformers:
+      - trimprefix: "v"
+
+
+#======================
+targets:
+
+  pre-commit:
+    name: "Bump Pre-Commit version."
+    kind: dockerfile
+    sourceid: pre-commit
+    spec:
+      file: &dockerfilePath "docker/Dockerfile" # SETS Docker File Path
       instruction:
         keyword: ARG
-        matcher: GIT_VERSION     # official matcher for ARG key
+        matcher: PRE_COMMIT_VERSION
+
+  semantic-release:
+    name: "Bump Semantic-Release version."
+    kind: dockerfile
+    sourceid: semantic-release
+    spec:
+      file: *dockerfilePath
+      instruction:
+        keyword: ARG
+        matcher: SEMANTIC_RELEASE_VERSION
+
+  ruff:
+    name: "Bump Ruff version."
+    kind: dockerfile
+    sourceid: ruff
+    spec:
+      file: *dockerfilePath
+      instruction:
+        keyword: ARG
+        matcher: RUFF_VERSION
+
+  updatecli:
+    name: "Bump UpdateCLI version."
+    kind: dockerfile
+    sourceid: updatecli
+    spec:
+      file: *dockerfilePath
+      instruction:
+        keyword: ARG
+        matcher: UPDATECLI_VERSION
+
+  pytest:
+    name: "Bump PyTest version."
+    kind: dockerfile
+    sourceid: pytest
+    spec:
+      file: *dockerfilePath
+      instruction:
+        keyword: ARG
+        matcher: PYTEST_VERSION
+
+  commitizen:
+    name: "Bump Commitizen version."
+    kind: dockerfile
+    sourceid: commitizen
+    spec:
+      file: *dockerfilePath
+      instruction:
+        keyword: ARG
+        matcher: COMMITIZEN_VERSION
+
+  sphinx:
+    name: "Bump Sphinx version."
+    kind: dockerfile
+    sourceid: sphinx
+    spec:
+      file: *dockerfilePath
+      instruction:
+        keyword: ARG
+        matcher: SPHINX_VERSION
